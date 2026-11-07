@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <title>Instant Regrets Banner</title>
 <style>
-  @font-face { font-family: "Luckiest Guy"; src: url("fonts/luckiest-guy-latin-400-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Permanent Marker"; src: url("fonts/permanent-marker-latin-400-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Bebas Neue"; src: url("fonts/bebas-neue-latin-400-normal.woff2") format("woff2"); }
-  html, body { margin: 0; padding: 0; background: #111; }
+  @font-face { font-family: "Poppins"; font-weight: 500; src: url("fonts/poppins-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 600; src: url("fonts/poppins-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 800; src: url("fonts/poppins-latin-800-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Roboto"; font-weight: 500; src: url("fonts/roboto-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Anton"; font-weight: 400; src: url("fonts/anton-latin-400-normal.woff2") format("woff2"); }
+  html, body { margin: 0; padding: 0; background: #090909; }
   svg { display: block; }
 </style>
 </head>
@@ -15,31 +17,21 @@
 <svg id="banner" xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440"></svg>
 <script>
 /*
- * The Instant Regrets Channel — YouTube banner (2560 x 1440)
+ * INSTANT REGRETS: YouTube banner (2560 x 1440), built from the channel's own Shorts design:
+ * black panel, white Poppins "instant regrets." wordmark with the red header rule, Anton headline
+ * with the last words in gold, the paper-bag mascot, THE FACTS block, WAIT. / 0.5x SLOW-MO tags,
+ * the torn edge, and the crossed-out "regrets" channel logo.
  * Safe area for text/logo on every device: 1546 x 423, centred.
- * Desktop shows 2560 x 423, tablet 1855 x 423, TV the full canvas.
  *
- * URL options:  ?theme=dark   dark alternate palette
- *               ?guides=1     draw the desktop / tablet / safe-area boxes
- *               ?transparent=1&only=main   logo row only (used to measure safe-area margins)
+ * URL options: ?guides=1                  draw the desktop / tablet / safe-area boxes
+ *              ?transparent=1&only=main   centre row only (used to measure safe-area margins)
  */
 const params = new URLSearchParams(location.search);
 const W = 2560, H = 1440, CX = 1280, CY = 720;
 const BAND = { top: 508.5, bottom: 931.5 };
 const SAFE = { left: 507, right: 2053 };
-
-const THEMES = {
-  blue: { bg: '#2B57F0', ray: '#3F6BFF', rayOpacity: 0.7, dots: '#1735B8', dotOpacity: 0.55,
-          vignette: '#081455', vignetteOpacity: 0.6, extrude: '#15121C', propShadow: '#1A34A8', bomb: '#2E2840', bombRim: null },
-  dark: { bg: '#17131F', ray: '#211B2D', rayOpacity: 1, dots: '#2D2642', dotOpacity: 0.9,
-          vignette: '#000000', vignetteOpacity: 0.65, extrude: '#E8352B', propShadow: '#0A080E', bomb: '#4A4163', bombRim: '#6E6390' },
-};
-const T = THEMES[params.get('theme') || 'blue'];
-const C = {
-  ink: '#15121C', yellow: '#FFD126', yellowLight: '#FFE978', yellowDark: '#FFB400',
-  red: '#FF3B3B', redDark: '#C61F2E', white: '#FFFFFF', cream: '#FFF7E6',
-  sweat: '#7FD8FF', orange: '#FF7A1A',
-};
+const TABLET = { left: 352.5, right: 2207.5 };
+const C = { bg: '#090909', white: '#FFFFFF', gold: '#E0AD38', red: '#D01F27', strip: '#161616', pattern: '#212121', tagBg: '#0B0B0B' };
 
 const NS = 'http://www.w3.org/2000/svg';
 function el(tag, attrs = {}, parent) {
@@ -52,299 +44,149 @@ function el(tag, attrs = {}, parent) {
   return e;
 }
 const ctx = document.createElement('canvas').getContext('2d');
-function measure(text, size, family) {
-  ctx.font = `${size}px "${family}"`;
+function measure(text, size, family, weight = 400) {
+  ctx.font = `${weight} ${size}px "${family}"`;
   return ctx.measureText(text);
 }
-
 const svg = document.getElementById('banner');
-const defs = el('defs', {}, svg);
 
-/* ---------- gradients ---------- */
-function linear(id, stops, x1 = 0, y1 = 0, x2 = 0, y2 = 1) {
-  const g = el('linearGradient', { id, x1, y1, x2, y2 }, defs);
-  stops.forEach(([o, c, a]) => el('stop', { offset: o, 'stop-color': c, 'stop-opacity': a ?? 1 }, g));
+/* ---------- brand pieces, as used in the Shorts ---------- */
+// "instant regrets." : Poppins ExtraBold + Poppins Medium at 0.36x, sitting on instant's x-height
+const TRACK = -0.035;   // em, "instant" is set tight in the Shorts header
+function wordmark(g, x, baseline, size, color = C.white) {
+  const xh = measure('n', size, 'Poppins', 800).actualBoundingBoxAscent;
+  const iw = measure('instant', size, 'Poppins', 800).width + 6 * TRACK * size;
+  const rs = regretsSize(xh), gap = xh * 0.36, rb = baseline - xh * 0.3;
+  el('text', { x, y: baseline, 'font-family': 'Poppins', 'font-weight': 800, 'font-size': size, 'letter-spacing': (TRACK * size).toFixed(2), fill: color, text: 'instant' }, g);
+  el('text', { x: x + iw + gap, y: rb, 'font-family': 'Roboto', 'font-weight': 500, 'font-size': rs, fill: color, text: 'regrets.' }, g);
+  const rw = measure('regrets.', rs, 'Roboto', 500).width;
+  return { width: iw + gap + rw, ascent: measure('instant', size, 'Poppins', 800).actualBoundingBoxAscent, xh };
 }
-linear('gTitle', [[0, C.yellowLight], [0.5, C.yellow], [1, C.yellowDark]]);
-linear('gFace', [[0, '#FFE56A'], [0.6, C.yellow], [1, '#FFB000']]);
-const vg = el('radialGradient', { id: 'gVignette', cx: '50%', cy: '50%', r: '72%' }, defs);
-el('stop', { offset: 0.5, 'stop-color': T.vignette, 'stop-opacity': 0 }, vg);
-el('stop', { offset: 1, 'stop-color': T.vignette, 'stop-opacity': T.vignetteOpacity }, vg);
-
-/* ---------- background ---------- */
-function drawBackground(g) {
-  el('rect', { width: W, height: H, fill: T.bg }, g);
-  // sunburst rays from the logo centre
-  const rays = el('g', { fill: T.ray, opacity: T.rayOpacity }, g);
-  const n = 36, R = 3200, off = -Math.PI / 2;
-  for (let i = 0; i < n; i += 2) {
-    const a0 = off + (i / n) * Math.PI * 2, a1 = off + ((i + 1) / n) * Math.PI * 2;
-    el('polygon', { points: `${CX},${CY} ${CX + R * Math.cos(a0)},${CY + R * Math.sin(a0)} ${CX + R * Math.cos(a1)},${CY + R * Math.sin(a1)}` }, rays);
+// "regrets." is Roboto Medium with an x-height 0.364x that of "instant" (measured from the Shorts header)
+function regretsSize(xh) { return 0.364 * xh / (measure('n', 100, 'Roboto', 500).actualBoundingBoxAscent / 100); }
+function wordmarkWidth(size) {
+  const xh = measure('n', size, 'Poppins', 800).actualBoundingBoxAscent;
+  return measure('instant', size, 'Poppins', 800).width + 6 * TRACK * size + xh * 0.36 + measure('regrets.', regretsSize(xh), 'Roboto', 500).width;
+}
+// plain rectangular caption tags (WAIT. / 0.5x SLOW-MO)
+function tag(g, x, y, text, size, fill, color, padX = 0.32, padY = 0.22) {
+  const m = measure(text, size, 'Anton'), cap = measure('H', size, 'Anton').actualBoundingBoxAscent;
+  const w = m.width + size * padX * 2, h = cap + size * padY * 2;
+  el('rect', { x, y, width: w, height: h, fill }, g);
+  el('text', { x: x + size * padX, y: y + size * padY + cap, 'font-family': 'Anton', 'font-size': size, fill: color, 'xml:space': 'preserve', text }, g);
+  return { w, h };
+}
+// torn edge between "video" and the black panel
+function rng(seed) {
+  return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+function tornPanel(g, edgeY, dir, seed, far, s = 2.2) {
+  // black panel on the far side of edgeY; dir = -1 spikes point up, +1 spikes point down
+  const r = rng(seed), pts = [];
+  for (let x = -40; x < W + 40;) {
+    const w = (12 + r() * 30) * s, peak = (r() < 0.3 ? 3 + r() * 6 : 9 + r() * 20) * s;
+    pts.push([x, edgeY + dir * -(r() * 3 * s)]);
+    pts.push([x + w * (0.3 + r() * 0.4), edgeY + dir * peak]);
+    x += w;
   }
-  // comic halftone, growing towards the edges
-  const dots = el('g', { fill: T.dots, opacity: T.dotOpacity }, g);
-  const s = 26;
-  for (let row = 0, y = 0; y <= H + s; row++, y += s * 0.866) {
-    for (let x = (row % 2) * s / 2; x <= W + s; x += s) {
-      const dx = (x - CX) / (W / 2), dy = (y - CY) / (H / 2);
-      const t = Math.min(1, Math.max(0, (Math.hypot(dx, dy) - 0.42) / 0.85));
-      const r = s * 0.46 * Math.pow(t, 1.1);
-      if (r > 0.8) el('circle', { cx: x.toFixed(1), cy: y.toFixed(1), r: r.toFixed(2) }, dots);
-    }
+  pts.push([W + 40, edgeY], [W + 40, far], [-40, far]);
+  el('polygon', { points: pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' '), fill: C.bg }, g);
+}
+function patternStrip(g, y0, y1) {
+  el('rect', { x: 0, y: y0, width: W, height: y1 - y0, fill: C.strip }, g);
+  const pg = el('g', {}, g);
+  for (let row = 0, y = y0 + 70; y < y1 + 40; row++, y += 96) {
+    for (let x = -260 + (row % 2) * 250; x < W; x += 500) wordmark(pg, x, y, 58, C.pattern);
   }
-  el('rect', { width: W, height: H, fill: 'url(#gVignette)' }, g);
 }
 
-/* ---------- title ---------- */
-function drawTitle(g, cx, cy) {
-  const fam = 'Luckiest Guy';
-  const size = +params.get('ts') || 172;
-  const cap = measure('H', size, fam).actualBoundingBoxAscent;
-  const lines = [
-    { word: 'INSTANT', rot: [-3, 2, -2, 3, -2, 2, -3], dy: [0, -4, 2, -3, 3, -2, 1], dx: [0, 0, 0, 0, 0, 0, 0] },
-    { word: 'REGRETS', rot: [2, -3, 3, -2, 2, -2, 13], dy: [-2, 3, -3, 2, -2, 3, 12], dx: [0, 0, 0, 0, 0, 0, 8] },
-  ];
-  const lineGap = Math.round(cap * 0.16);
-  const tagH = 58, tagGap = -12, ribbonGap = 12, ribbonH = 52;
-  const blockH = tagH + tagGap + cap * 2 + lineGap + ribbonGap + ribbonH;
-  const top = cy - blockH / 2;
-  const base1 = top + tagH + tagGap + cap;
-  const base2 = base1 + cap + lineGap;
-
-  const letters = [];
-  let titleW = 0;
-  lines.forEach((ln, li) => {
-    const w = measure(ln.word, size, fam).width;
-    titleW = Math.max(titleW, w);
-    const x0 = cx - w / 2;
-    [...ln.word].forEach((ch, i) => {
-      const x = x0 + measure(ln.word.slice(0, i), size, fam).width + ln.dx[i];
-      const lw = measure(ch, size, fam).width;
-      const base = (li ? base2 : base1) + ln.dy[i];
-      letters.push({ ch, x, base, rot: ln.rot[i], pcx: x + lw / 2, pcy: base - cap / 2 });
-    });
-  });
-  const L = (parent, l, extra) => el('text', {
-    x: l.x.toFixed(1), y: l.base.toFixed(1), 'font-family': fam, 'font-size': size,
-    transform: `rotate(${l.rot} ${l.pcx.toFixed(1)} ${l.pcy.toFixed(1)})`, text: l.ch, ...extra,
-  }, parent);
-
-  const outline = 12, steps = 18;
-  const ext = el('g', { fill: T.extrude, stroke: T.extrude, 'stroke-width': outline * 2, 'stroke-linejoin': 'round' }, g);
-  for (let k = steps; k >= 1; k--) {
-    const gg = el('g', { transform: `translate(${(k * 0.62).toFixed(2)} ${k})` }, ext);
-    letters.forEach(l => L(gg, l));
-  }
-  const ol = el('g', { fill: C.ink, stroke: C.ink, 'stroke-width': outline * 2, 'stroke-linejoin': 'round' }, g);
-  letters.forEach(l => L(ol, l));
-  const fill = el('g', { fill: 'url(#gTitle)' }, g);
-  letters.forEach(l => L(fill, l));
-
-  // "THE" tag
-  const tagFont = 46, tagW = measure('THE', tagFont, fam).width + 44;
-  const tx = cx - titleW / 2 + 6, ty = top;
-  const tag = el('g', { transform: `rotate(-7 ${tx + tagW / 2} ${ty + tagH / 2})` }, g);
-  el('rect', { x: tx + 7, y: ty + 9, width: tagW, height: tagH, rx: 14, fill: C.ink }, tag);
-  el('rect', { x: tx, y: ty, width: tagW, height: tagH, rx: 14, fill: C.red, stroke: C.ink, 'stroke-width': 7 }, tag);
-  el('text', { x: tx + tagW / 2, y: ty + tagH / 2 + tagFont * 0.34, 'text-anchor': 'middle', 'font-family': fam, 'font-size': tagFont, fill: C.white, text: 'THE' }, tag);
-
-  // "CHANNEL" ribbon
-  const rFont = 48, rText = 'CHANNEL', spacing = 15;
-  const rTextW = measure(rText, rFont, 'Bebas Neue').width + spacing * (rText.length - 1);
-  const rw = rTextW + 84, ry = base2 + ribbonGap, rx = cx - rw / 2, notch = 22, tail = 36;
-  const rib = el('g', { transform: `rotate(-2 ${cx} ${ry + ribbonH / 2})` }, g);
-  const pts = (ox, oy) => [
-    [rx - tail, ry], [rx + rw + tail, ry], [rx + rw + tail - notch, ry + ribbonH / 2], [rx + rw + tail, ry + ribbonH],
-    [rx - tail, ry + ribbonH], [rx - tail + notch, ry + ribbonH / 2],
-  ].map(([a, b]) => `${a + ox},${b + oy}`).join(' ');
-  el('polygon', { points: pts(7, 9), fill: C.ink, 'stroke-linejoin': 'round' }, rib);
-  el('polygon', { points: pts(0, 0), fill: C.red, stroke: C.ink, 'stroke-width': 7, 'stroke-linejoin': 'round' }, rib);
-  el('text', { x: cx + spacing / 2, y: ry + ribbonH / 2 + rFont * 0.35, 'text-anchor': 'middle', 'font-family': 'Bebas Neue', 'font-size': rFont, 'letter-spacing': spacing, fill: C.white, text: rText }, rib);
-
-  return { width: titleW, top, bottom: ry + ribbonH, cap };
+/* ---------- layout ---------- */
+function drawTV(g) {
+  // top: a "video" strip with the Shorts overlay tags, torn into the black panel
+  patternStrip(g, 0, 470);
+  const w1 = measure('WAIT.', 64, 'Anton').width + 64 * 0.64;
+  tag(g, CX - w1 / 2, 150, 'WAIT.', 64, C.red, C.white);
+  const w2 = measure('0.5x  SLOW-MO', 52, 'Anton').width + 52 * 0.64;
+  tag(g, W - 150 - w2, 90, '0.5x  SLOW-MO', 52, C.tagBg, C.gold);
+  tornPanel(g, 440, -1, 7, 990);
+  // bottom: the same tear, mirrored
+  patternStrip(g, 975, H);
+  tornPanel(g, 1000, 1, 11, 470);
 }
 
-/* ---------- grimacing mascot ---------- */
-function drawFace(g, cx, cy, R) {
-  const f = el('g', { transform: `translate(${cx} ${cy}) rotate(6)` }, g);
-  const sw = R * 0.08;
-  // sticker border + hard shadow
-  el('circle', { cx: 12, cy: 15, r: R + 20, fill: C.ink }, f);
-  el('circle', { r: R + 20, fill: C.white, stroke: C.ink, 'stroke-width': sw * 0.6 }, f);
-  el('circle', { r: R, fill: 'url(#gFace)', stroke: C.ink, 'stroke-width': sw }, f);
-  // eyes (wide, looking left at the title)
-  [-1, 1].forEach(side => {
-    const ex = side * R * 0.36, ey = -R * 0.2;
-    el('ellipse', { cx: ex, cy: ey, rx: R * 0.21, ry: R * 0.27, fill: C.white, stroke: C.ink, 'stroke-width': sw * 0.75 }, f);
-    el('circle', { cx: ex - R * 0.08, cy: ey + R * 0.02, r: R * 0.085, fill: C.ink }, f);
-    el('circle', { cx: ex - R * 0.1, cy: ey - R * 0.01, r: R * 0.028, fill: C.white }, f);
-    // worried brows: inner ends raised
-    el('path', { d: `M ${side * R * 0.6} ${-R * 0.5} Q ${side * R * 0.42} ${-R * 0.66} ${side * R * 0.16} ${-R * 0.68}`, stroke: C.ink, 'stroke-width': sw * 1.05, 'stroke-linecap': 'round', fill: 'none' }, f);
-  });
-  // grimace
-  const mw = R * 1.12, mh = R * 0.5, my = R * 0.2;
-  el('rect', { x: -mw / 2, y: my, width: mw, height: mh, rx: mh * 0.36, fill: C.white, stroke: C.ink, 'stroke-width': sw * 0.8 }, f);
-  const teeth = el('g', { stroke: C.ink, 'stroke-width': sw * 0.55, 'stroke-linecap': 'round' }, f);
-  el('line', { x1: -mw / 2, y1: my + mh / 2, x2: mw / 2, y2: my + mh / 2 }, teeth);
-  [-0.25, 0, 0.25].forEach(t => el('line', { x1: t * mw, y1: my, x2: t * mw, y2: my + mh }, teeth));
-  // sweat drop
-  const sx = R * 0.86, sy = -R * 0.62, d = R * 0.2;
-  el('path', { d: `M ${sx} ${sy - d * 1.6} C ${sx + d * 0.4} ${sy - d * 0.6} ${sx + d} ${sy - d * 0.1} ${sx + d} ${sy + d * 0.45} A ${d} ${d} 0 0 1 ${sx - d} ${sy + d * 0.45} C ${sx - d} ${sy - d * 0.1} ${sx - d * 0.4} ${sy - d * 0.6} ${sx} ${sy - d * 1.6} Z`, fill: C.sweat, stroke: C.ink, 'stroke-width': sw * 0.6, 'stroke-linejoin': 'round' }, f);
-  el('ellipse', { cx: sx - d * 0.35, cy: sy + d * 0.25, rx: d * 0.18, ry: d * 0.32, fill: C.white, opacity: 0.9 }, f);
-  return f;
+function drawEdges(g) {
+  // left (desktop only, clear of the tablet crop): THE FACTS, straight from the Shorts panel
+  const fx = 86, fy = 612;
+  el('text', { x: fx, y: fy, 'font-family': 'Anton', 'font-size': 50, fill: C.gold, text: 'THE FACTS' }, g);
+  el('rect', { x: fx, y: fy + 14, width: measure('THE FACTS', 50, 'Anton').width, height: 6, fill: C.red }, g);
+  [['New Shorts?', C.white], ['Every day.', C.gold], ['Anyone hurt?', C.white], ['Nobody seriously.', C.gold]]
+    .forEach(([t, col], i) => el('text', { x: fx, y: fy + 72 + i * 38 + (i > 1 ? 16 : 0), 'font-family': 'Poppins', 'font-weight': 600, 'font-size': 27, fill: col, text: t }, g));
+  // right (desktop only): the channel logo + "Daily YouTube Shorts"
+  const lw = 248, lh = lw * 151 / 516, lx = TABLET.right + 30, ly = 648;
+  el('image', { href: 'assets/regrets-logo.png', x: lx, y: ly, width: lw, height: lh }, g);
+  const sz = 23.5, y = ly + lh + 54;
+  const a = measure('Daily ', sz, 'Poppins', 500).width, b = measure('YouTube', sz, 'Poppins', 800).width;
+  const sw = measure('Shorts', sz, 'Poppins', 800).width + 14, total = a + b + 6 + sw;
+  const sx = lx + lw / 2 - total / 2;
+  el('text', { x: sx, y, 'font-family': 'Poppins', 'font-weight': 500, 'font-size': sz, fill: C.white, text: 'Daily' }, g);
+  el('text', { x: sx + a, y, 'font-family': 'Poppins', 'font-weight': 800, 'font-size': sz, fill: C.white, text: 'YouTube' }, g);
+  el('rect', { x: sx + a + b + 6, y: y - sz * 0.86, width: sw, height: sz * 1.12, fill: C.red }, g);
+  el('text', { x: sx + a + b + 13, y, 'font-family': 'Poppins', 'font-weight': 800, 'font-size': sz, fill: C.white, text: 'Shorts' }, g);
 }
 
-/* ---------- "famous last words" caption ---------- */
-function drawCaption(g, cx, cy) {
-  const fam = 'Permanent Marker', size = +params.get('cs') || 42, lh = size * 1.12;
-  const lines = [['WHAT COULD', C.ink], ['POSSIBLY', C.ink], ['GO WRONG?', C.redDark]];
-  const tw = Math.max(...lines.map(([t]) => measure(t, size, fam).width));
-  const padX = 30, padY = 26, w = tw + padX * 2, h = lh * lines.length + padY * 2 - size * 0.12;
-  const x = cx - w / 2, y = cy - h / 2 + 18;
-  const box = el('g', { transform: `rotate(-4 ${cx} ${cy})` }, g);
-  el('rect', { x: x + 11, y: y + 13, width: w, height: h, rx: 10, fill: C.ink }, box);
-  el('rect', { x, y, width: w, height: h, rx: 10, fill: C.cream, stroke: C.ink, 'stroke-width': 8 }, box);
-  lines.forEach(([t, col], i) => el('text', {
-    x: cx, y: y + padY + size * 0.86 + i * lh, 'text-anchor': 'middle', 'font-family': fam, 'font-size': size, fill: col, text: t,
-  }, box));
-  // tab label
-  const lab = 'FAMOUS LAST WORDS', lsz = 32, lsp = 3;
-  const lw = measure(lab, lsz, 'Bebas Neue').width + lsp * (lab.length - 1) + 32;
-  el('rect', { x: x + 16, y: y - 42, width: lw, height: 48, rx: 8, fill: C.ink }, box);
-  el('text', { x: x + 32, y: y - 7, 'font-family': 'Bebas Neue', 'font-size': lsz, 'letter-spacing': lsp, fill: C.yellow, text: lab }, box);
-  return { width: w, height: h };
+function drawMain(g) {
+  const left = SAFE.left + 48;
+  // mascot: right end of the safe area, standing on the bottom of the band like in the Shorts panel
+  const mW = 400, mH = 469, personRight = 351, bagTop = 19;
+  const mx = SAFE.right - 34 - personRight, my = BAND.top + 34 - bagTop;
+  // wordmark fills the space up to the mascot
+  const avail = mx + 35 - 64 - left;
+  const size = avail / (wordmarkWidth(100) / 100);
+  const tag1 = measure('THAT SPLIT SECOND BETWEEN “WATCH THIS” AND “OH NO.”', 100, 'Anton');
+  const tSize = avail / (tag1.width / 100);
+  const tCap = measure('H', tSize, 'Anton').actualBoundingBoxAscent;
+  const asc = measure('instant', size, 'Poppins', 800).actualBoundingBoxAscent;
+  const gap1 = 30, rule = 9, gap2 = 34;
+  const blockH = asc + gap1 + rule + gap2 + tCap;
+  const top = CY - blockH / 2 + 2;
+  const base = top + asc;
+  const wm = wordmark(g, left, base, size);
+  el('rect', { x: left + 4, y: base + gap1, width: wm.width - 4, height: rule, fill: C.red }, g);
+  const t = el('text', { x: left + 2, y: base + gap1 + rule + gap2 + tCap, 'font-family': 'Anton', 'font-size': tSize, 'xml:space': 'preserve' }, g);
+  el('tspan', { fill: C.white, text: 'THAT SPLIT SECOND BETWEEN “WATCH THIS” AND ' }, t);
+  el('tspan', { fill: C.gold, text: '“OH NO.”' }, t);
+  el('image', { href: 'assets/mascot.png', x: mx, y: my, width: mW, height: mH }, g);
 }
 
-/* ---------- debug guides ---------- */
 function drawGuides(g) {
   const z = (x, w, col, label) => {
     el('rect', { x, y: BAND.top, width: w, height: BAND.bottom - BAND.top, fill: 'none', stroke: col, 'stroke-width': 4, 'stroke-dasharray': '18 10' }, g);
-    el('text', { x: x + 10, y: BAND.top - 12, 'font-family': 'Bebas Neue', 'font-size': 36, fill: col, text: label }, g);
+    el('text', { x: x + 10, y: BAND.top - 12, 'font-family': 'Anton', 'font-size': 30, fill: col, text: label }, g);
   };
   z(0, W, '#00FF88', 'DESKTOP 2560x423');
-  z((W - 1855) / 2, 1855, '#FFA500', 'TABLET 1855x423');
-  z(SAFE.left, SAFE.right - SAFE.left, '#FF2D55', 'SAFE / MOBILE 1546x423');
-}
-
-/* ---------- props: desktop edges + TV corners ---------- */
-const SHADOW = () => T.propShadow;
-function spark(g, x, y, r) {
-  const star = (n, ro, ri, off = 0) => Array.from({ length: n * 2 }, (_, i) => {
-    const a = off + (i * Math.PI) / n, rr = i % 2 ? ri : ro;
-    return `${(x + rr * Math.cos(a)).toFixed(1)},${(y + rr * Math.sin(a)).toFixed(1)}`;
-  }).join(' ');
-  el('polygon', { points: star(9, r, r * 0.5), fill: C.yellow, stroke: C.ink, 'stroke-width': 6, 'stroke-linejoin': 'round' }, g);
-  el('polygon', { points: star(9, r * 0.52, r * 0.27, 0.17), fill: C.red }, g);
-}
-function drawBomb(g, x, y, s, rot) {
-  const b = el('g', { transform: `translate(${x} ${y}) rotate(${rot}) scale(${s})` }, g);
-  const R = 100;
-  const fuse = 'M 72 -103 C 98 -150 150 -118 156 -168';
-  el('circle', { cx: 12, cy: 14, r: R + 5, fill: SHADOW() }, b);
-  el('path', { d: fuse, stroke: C.ink, 'stroke-width': 22, fill: 'none', 'stroke-linecap': 'round' }, b);
-  el('path', { d: fuse, stroke: '#E9C28C', 'stroke-width': 9, fill: 'none', 'stroke-linecap': 'round' }, b);
-  el('rect', { x: -30, y: -R - 28, width: 60, height: 46, rx: 8, fill: '#575170', stroke: C.ink, 'stroke-width': 9, transform: 'rotate(35)' }, b);
-  if (T.bombRim) el('circle', { r: R + 9, fill: T.bombRim }, b);
-  el('circle', { r: R, fill: T.bomb, stroke: C.ink, 'stroke-width': 10 }, b);
-  el('path', { d: `M ${-R * 0.64} ${-R * 0.16} A ${R * 0.68} ${R * 0.68} 0 0 1 ${-R * 0.14} ${-R * 0.64}`, stroke: C.white, 'stroke-width': 13, 'stroke-linecap': 'round', fill: 'none', opacity: 0.5 }, b);
-  el('circle', { cx: -R * 0.68, cy: R * 0.08, r: 7, fill: C.white, opacity: 0.5 }, b);
-  spark(b, 156, -170, 48);
-}
-let coneN = 0;
-function drawCone(g, x, y, s, rot) {
-  const c = el('g', { transform: `translate(${x} ${y}) rotate(${rot}) scale(${s})` }, g);
-  const body = 'M -80 -12 L -25 -236 Q 0 -250 25 -236 L 80 -12 Z';
-  const base = { x: -114, y: -20, width: 228, height: 40, rx: 10 };
-  const sh = el('g', { transform: 'translate(12 14)', fill: SHADOW() }, c);
-  el('path', { d: body }, sh); el('rect', base, sh);
-  el('rect', { ...base, fill: '#D9520B', stroke: C.ink, 'stroke-width': 9 }, c);
-  el('path', { d: body, fill: C.orange }, c);
-  const id = `coneClip${coneN++}`;
-  el('path', { d: body }, el('clipPath', { id }, defs));
-  const st = el('g', { 'clip-path': `url(#${id})` }, c);
-  el('rect', { x: -130, y: -176, width: 260, height: 36, fill: C.white }, st);
-  el('rect', { x: -130, y: -100, width: 260, height: 36, fill: C.white }, st);
-  el('path', { d: 'M -46 -34 L -14 -206', stroke: C.white, 'stroke-width': 12, 'stroke-linecap': 'round', opacity: 0.35 }, st);
-  el('path', { d: body, fill: 'none', stroke: C.ink, 'stroke-width': 9, 'stroke-linejoin': 'round' }, c);
-}
-function drawBanana(g, x, y, s, rot) {
-  const b = el('g', { transform: `translate(${x} ${y}) rotate(${rot}) scale(${s})` }, g);
-  const flapL = 'M -16 -6 C -50 -10 -96 14 -116 50 Q -123 63 -110 67 Q -98 66 -92 55 C -76 31 -46 23 -12 22 Z';
-  const flapR = 'M 16 -6 C 52 -8 98 18 118 54 Q 124 66 111 69 Q 99 67 94 57 C 78 34 48 25 12 22 Z';
-  const flapF = 'M -20 10 C -28 44 -20 72 -4 88 Q 6 96 15 87 C 27 66 27 38 18 10 Z';
-  const top = 'M -25 10 C -27 -20 -19 -44 -3 -60 Q 5 -65 12 -58 C 25 -42 29 -16 25 10 Z';
-  const sh = el('g', { transform: 'translate(10 12)', fill: SHADOW() }, b);
-  [flapL, flapR, flapF, top].forEach(d => el('path', { d }, sh));
-  const st = { stroke: C.ink, 'stroke-width': 8, 'stroke-linejoin': 'round' };
-  const pale = { stroke: '#FFF4C7', 'stroke-width': 7, 'stroke-linecap': 'round', fill: 'none' };
-  el('path', { d: flapL, fill: C.yellow, ...st }, b);
-  el('path', { d: 'M -26 8 C -54 8 -82 24 -100 50', ...pale }, b);
-  el('path', { d: flapR, fill: C.yellow, ...st }, b);
-  el('path', { d: 'M 26 8 C 56 9 84 26 102 52', ...pale }, b);
-  el('path', { d: top, fill: C.yellow, ...st }, b);
-  el('path', { d: 'M -8 -46 C -14 -30 -15 -12 -13 4', ...pale }, b);
-  el('path', { d: flapF, fill: '#FFDF55', ...st }, b);
-  [[-114, 62], [114, 64], [6, 90]].forEach(([tx, ty]) => el('circle', { cx: tx, cy: ty, r: 7.5, fill: '#6B4A2B' }, b));
-  el('rect', { x: -2, y: -80, width: 14, height: 24, rx: 4, fill: '#7A5532', stroke: C.ink, 'stroke-width': 6, transform: 'rotate(12 5 -68)' }, b);
-}
-function sparkle(g, x, y, r, fill = C.yellow) {
-  const k = 0.2;
-  const d = `M ${x} ${y - r} Q ${x + r * k} ${y - r * k} ${x + r} ${y} Q ${x + r * k} ${y + r * k} ${x} ${y + r} Q ${x - r * k} ${y + r * k} ${x - r} ${y} Q ${x - r * k} ${y - r * k} ${x} ${y - r} Z`;
-  el('path', { d, fill, stroke: C.ink, 'stroke-width': 6, 'stroke-linejoin': 'round' }, g);
-}
-let tapeN = 0;
-function drawTape(g, cx, cy, len, angle) {
-  const h = 78, t = el('g', { transform: `translate(${cx} ${cy}) rotate(${angle})` }, g);
-  el('rect', { x: -len / 2 + 10, y: -h / 2 + 14, width: len, height: h, fill: SHADOW() }, t);
-  el('rect', { x: -len / 2, y: -h / 2, width: len, height: h, fill: C.yellow, stroke: C.ink, 'stroke-width': 7 }, t);
-  const id = `tapeClip${tapeN++}`;
-  el('rect', { x: -len / 2, y: -h / 2, width: len, height: h }, el('clipPath', { id }, defs));
-  const tx = el('g', { 'clip-path': `url(#${id})` }, t);
-  const unit = 'CAUTION  ✦  DO NOT TRY THIS AT HOME  ✦  ', size = 50, sp = 4;
-  const uw = measure(unit, size, 'Bebas Neue').width + sp * unit.length;
-  for (let x = -len / 2 - 40; x < len / 2; x += uw) {
-    el('text', { x, y: size * 0.36, 'font-family': 'Bebas Neue', 'font-size': size, 'letter-spacing': sp, fill: C.ink, 'xml:space': 'preserve', text: unit }, tx);
-  }
+  z(TABLET.left, TABLET.right - TABLET.left, '#FFA500', 'TABLET 1855x423');
+  z(SAFE.left, SAFE.right - SAFE.left, '#FF2D55', 'SAFE 1546x423');
 }
 
 function build() {
   if (params.get('transparent')) document.documentElement.style.background = document.body.style.background = 'transparent';
-  if (!params.get('transparent')) drawBackground(el('g', { id: 'background' }, svg));
+  else el('rect', { width: W, height: H, fill: C.bg }, svg);
   if (!params.get('only')) {
-    const tv = el('g', { id: 'tv-corners' }, svg);
-    drawTape(tv, 300, 190, 1100, -31);
-    drawTape(tv, 2260, 1250, 1100, -31);
-    const edge = el('g', { id: 'desktop-edges' }, svg);
-    drawBomb(edge, 240, 782, 0.92, -12);
-    drawCone(edge, 2244, 850, 0.96, 9);
-    drawBanana(edge, 2452, 836, 0.76, -6);
-    sparkle(edge, 92, 600, 30);
-    sparkle(edge, 430, 586, 18, C.white);
-    sparkle(edge, 2470, 610, 26);
-    sparkle(edge, 2130, 600, 16, C.white);
+    drawTV(el('g', { id: 'tv' }, svg));
+    drawEdges(el('g', { id: 'desktop-edges' }, svg));
   }
-  // main row: [caption] [logo] [mascot], centred, all inside the 1546 x 423 safe area
-  const main = el('g', { id: 'main' }, svg);
-  const gap = 50, faceR = 120;
-  const capG = el('g', { id: 'caption' }, main);
-  drawCaption(capG, 0, CY - 4);
-  const titleG = el('g', { id: 'logo' }, main);
-  drawTitle(titleG, 0, CY + 2);
-  const faceG = el('g', { id: 'mascot' }, main);
-  drawFace(faceG, 0, CY + 4, faceR);
-  const bc = capG.getBBox(), bt = titleG.getBBox(), bf = faceG.getBBox();
-  const total = bc.width + gap + bt.width + gap + bf.width;
-  let x = CX - total / 2;
-  capG.setAttribute('transform', `translate(${(x - bc.x).toFixed(1)} 0)`); x += bc.width + gap;
-  titleG.setAttribute('transform', `translate(${(x - bt.x).toFixed(1)} 0)`); x += bt.width + gap;
-  faceG.setAttribute('transform', `translate(${(x - bf.x).toFixed(1)} 0)`);
-  // optical nudge: shadows/strokes extend right & down, so centre the *visible* row in the band
-  main.setAttribute('transform', 'translate(8 -5)');
+  drawMain(el('g', { id: 'main' }, svg));
   if (params.get('guides')) drawGuides(el('g', { id: 'guides' }, svg));
 }
 
-Promise.all(['Luckiest Guy', 'Permanent Marker', 'Bebas Neue'].map(f => document.fonts.load(`100px "${f}"`)))
+Promise.all([['Poppins', 500], ['Poppins', 600], ['Poppins', 800], ['Roboto', 500], ['Anton', 400]].map(([f, w]) => document.fonts.load(`${w} 100px "${f}"`)))
+  .then(() => new Promise(res => {
+    const imgs = ['assets/mascot.png', 'assets/regrets-logo.png'].map(src => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = src; }));
+    Promise.all(imgs).then(res);
+  }))
   .then(build)
+  .then(() => new Promise(r => setTimeout(r, 50)))
   .then(() => { window.__ready = true; });
 </script>
 </body>
