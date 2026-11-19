@@ -1,6 +1,6 @@
 # Paper Bag Reaction Library
 
-Four reusable reaction clips of the Instant Regrets Paper Bag guy, made with **Seedance 2.5, 1080p**
+Five reusable reaction clips of the Instant Regrets Paper Bag guy, made with **Seedance 2.5, 1080p**
 (1080×1920, 9:16, 5s, 24fps, with natural sound: paper rustle, hand rub, gasp, claps).
 
 **Built for reuse:** the same seamless white "regret room", a locked-off camera, chest-up centered framing,
@@ -13,6 +13,7 @@ and every clip **starts and ends on the same neutral pose**, so any clip can be 
 | `react_02_flinch.mp4` | Violent recoil, hands up, head snaps away, peeks through fingers | recoil **0.86s** · cringe hold 1.0–3.4s | **At impact**: falls, hits, crashes |
 | `react_03_facepalm.mp4` | Slow facepalm + slow head shakes + sigh | hand on 0.9s · shakes 1.4–3.6s | **After** dumb decisions, obvious mistakes |
 | `react_04_slow_clap.mp4` | Four slow sarcastic claps, head tilt | claps **1.32 / 2.10 / 2.84 / 3.58s** | **After** epic wipeouts, "well done" |
+| `react_05_cant_watch.mp4` *(720p, 720×1280)* | Hands snap over the eye holes, nervous finger-peek, head shake | hands up **0.6–1.0s** · peek ~2.5s · hands down 4.5s | **Before** ("I can't watch this") or **at impact** instead of the flinch |
 
 Neutral pose (safe in/out points): roughly 0.0–0.6s and the last ~0.8s of every clip.
 
@@ -29,4 +30,4 @@ Deadpan narrator ("Desmond" preset voice, Seed Audio), silence-trimmed WAVs:
 New lines cost about 0.3 credits each, so every Short can get a custom roast.
 
 ## Ideas for the next batch
-Laughing (bag shaking), "wait for it" lean-in with popcorn, thumbs down, covering eyes, shrug, standing ovation.
+Laughing (bag shaking), "wait for it" lean-in with popcorn, thumbs down, shrug, standing ovation.
