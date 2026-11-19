@@ -1,15 +1,20 @@
-# Shorts covers v3 (1080×1920, 9:16), "explosion" style
+# Shorts covers v4: minimal / sleek / modern (1080×1920)
 
-Matches the white-room reference: the Paper Bag guy centred in the white room (clap / facepalm / can't watch),
-with **people and objects from that Short frozen mid-air around him**, blurred foreground objects in the
-corners, and a short witty two-line headline. Built locally (cutouts from the real clips + reaction library).
+Brand typography (lowercase Poppins like the logo), one accent colour per Short, lots of negative space,
+clean Paper Bag cutouts. 5 designs × 5 Shorts.
 
-| Short | What's flying | Headlines (1–5) |
+| # | Design | Pose |
 |---|---|---|
-| Skatepark | The skater mid-fall and riding, skateboards, concrete chunks, glass, dust | CONCRETE WON · THE BOARD LEFT THE CHAT · SKILL: LOADING... · GRAVITY CHECK: FAILED · 0/10 LANDING |
-| Seltzer | The girl with the can, the friend in sunglasses, seltzer cans, spray droplets | SHE GOT SOAKED · HYDRATION LEVEL: MAX · 100 TIMES? NOPE. · FRIENDSHIP OVER? · DON'T OPEN IT |
-| Knicks | The #33 fan climbing, the fan on the ledge, basketballs, cracked phone, blue/orange confetti | HE FELL FOR HIS TEAM · GRIP STRENGTH: 0 · LITERALLY FELL · DON'T LET GO · 10/10 NO NOTES |
-| Banner | The torn banner, banner ribbons, baseballs, a bat, red/blue confetti | THE BANNER WON · WHAT COULD GO WRONG? · BIG ENTRANCE FAIL · BEST PLAY OF THE SEASON · THE BANNER IS UNDEFEATED |
-| Creek | The jumper mid-air, the mud splash, mud splatters | HE DIDN'T MAKE IT · GRAVITY: UNDEFEATED · MUD 1 KEVIN 0 · TRUST YOUR LEGS? · DON'T JUMP |
+| `_1` | **Duotone split**: the fail fills the top in a dark duotone, he stands on the accent seam; "instant regret no. 0X", headline, rating pill | Clap |
+| `_2` | **Big number**: flat accent background, giant rating numeral behind him, tier word headline | Facepalm |
+| `_3` | **Floating card**: off-white, one rounded photo of the fail with soft shadow, he peeks up from below | Can't watch |
+| `_4` | **Spotlight**: black, soft spotlight, the fail in a circular porthole with accent ring | Facepalm |
+| `_5` | **Before / during / regret**: three stacked rounded tiles telling the story | Clap |
 
-Poses by variant: 1 clap · 2 facepalm · 3 can't watch · 4 facepalm · 5 clap. Odd variants mirror the layout.
+| Short | Accent | Line | Rating |
+|---|---|---|---|
+| Skatepark | orange | concrete won. | 7/10 yikes |
+| Seltzer | sky blue | she got soaked. | 5/10 soaked |
+| Knicks | royal blue | he fell for his team. | 9/10 catastrophic |
+| Banner | red | the banner won. | 6/10 painful |
+| Creek | mud brown | he didn't make it. | 8/10 brutal |
