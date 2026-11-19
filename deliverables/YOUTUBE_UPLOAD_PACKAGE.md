@@ -82,6 +82,6 @@ instant regrets, instant regret, fails, fail compilation, funny fails, epic fail
 **File:** `instant_regrets_trailer_ig_story.mp4` (30s · 1080×1920 · 9:16)
 
 - Stories allow up to 60s per clip, so it posts as **one** story.
-- Add a **Link sticker** → `youtube.com/@THEINSTANTREGRETS` in the lower blank area (the end card has a "link in bio ↑" cue; move or replace as you like).
+- Add a **Link sticker** → `youtube.com/@THEINSTANTREGRETS` in the lower blank area (the end card has a "link in bio" cue).
 - Suggested sticker / poll: *"Biggest instant regret? 😬"* poll with options **"Yes, daily" / "Never 😇"**.
 - Top ~250px and bottom ~340px are kept clear of key graphics for the IG UI.
