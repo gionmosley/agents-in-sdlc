@@ -1,21 +1,15 @@
-# Shorts covers v2 (1080×1920, 9:16)
+# Shorts covers v3 (1080×1920, 9:16), "explosion" style
 
-5 covers per Short, each a different scene design inspired by the channel's thumbnails. Every cover has a
-clean Paper Bag cutout (clap / facepalm / can't watch only), a bold two-line headline (white + yellow slab),
-a **REGRET x/10** badge in the Short's colour, and the **instant regrets.** logo. Built locally, no credits.
+Matches the white-room reference: the Paper Bag guy centred in the white room (clap / facepalm / can't watch),
+with **people and objects from that Short frozen mid-air around him**, blurred foreground objects in the
+corners, and a short witty two-line headline. Built locally (cutouts from the real clips + reaction library).
 
-| # | Scene | Pose |
+| Short | What's flying | Headlines (1–5) |
 |---|---|---|
-| `_1` | **Explosion**: white room, colour sunburst, fail photos flying, glass + spatter | Slow clap |
-| `_2` | **Control room**: dark blue room, wall of monitors playing the Short's frames, red/blue rim light | Facepalm |
-| `_3` | **Cinema**: the fail on the big screen, projector beam, red seats | Can't watch |
-| `_4` | **Close-up**: giant facepalm, fail photo card, dark-to-grey gradient | Facepalm |
-| `_5` | **Impact photo**: big fail photo with red circle + arrow, sunburst | Slow clap |
+| Skatepark | The skater mid-fall and riding, skateboards, concrete chunks, glass, dust | CONCRETE WON · THE BOARD LEFT THE CHAT · SKILL: LOADING... · GRAVITY CHECK: FAILED · 0/10 LANDING |
+| Seltzer | The girl with the can, the friend in sunglasses, seltzer cans, spray droplets | SHE GOT SOAKED · HYDRATION LEVEL: MAX · 100 TIMES? NOPE. · FRIENDSHIP OVER? · DON'T OPEN IT |
+| Knicks | The #33 fan climbing, the fan on the ledge, basketballs, cracked phone, blue/orange confetti | HE FELL FOR HIS TEAM · GRIP STRENGTH: 0 · LITERALLY FELL · DON'T LET GO · 10/10 NO NOTES |
+| Banner | The torn banner, banner ribbons, baseballs, a bat, red/blue confetti | THE BANNER WON · WHAT COULD GO WRONG? · BIG ENTRANCE FAIL · BEST PLAY OF THE SEASON · THE BANNER IS UNDEFEATED |
+| Creek | The jumper mid-air, the mud splash, mud splatters | HE DIDN'T MAKE IT · GRAVITY: UNDEFEATED · MUD 1 KEVIN 0 · TRUST YOUR LEGS? · DON'T JUMP |
 
-| Short | Rating | Headlines (1–5) |
-|---|---|---|
-| Skatepark | 7/10 YIKES | CONCRETE WON · THE BOARD LEFT THE CHAT · I CAN'T WATCH THIS · SKILL: LOADING... · 0/10 LANDING |
-| Seltzer | 5/10 SOAKED | SHE GOT SOAKED · HYDRATION LEVEL: MAX · DON'T OPEN IT · FRIENDSHIP OVER? · 100 TIMES? NOPE. |
-| Knicks | 9/10 CATASTROPHIC | HE FELL FOR HIS TEAM · GRIP STRENGTH: 0 · DON'T LET GO · LITERALLY FELL · 10/10 NO NOTES |
-| Banner | 6/10 PAINFUL | THE BANNER WON · WHAT COULD GO WRONG? · I CAN'T WATCH THIS · BIG ENTRANCE FAIL · BEST PLAY OF THE SEASON |
-| Creek | 8/10 BRUTAL | HE DIDN'T MAKE IT · GRAVITY: UNDEFEATED · DON'T JUMP · MUD 1 KEVIN 0 · TRUST YOUR LEGS? |
+Poses by variant: 1 clap · 2 facepalm · 3 can't watch · 4 facepalm · 5 clap. Odd variants mirror the layout.
