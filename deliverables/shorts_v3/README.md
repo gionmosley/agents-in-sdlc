@@ -17,3 +17,19 @@ Caption style: yellow Anton all-caps, heavy black stroke, scale-pop per word (ma
 Sound: no music, all diegetic + cartoon SFX (slide whistle, record scratch, bonk, tape rewind, boom).
 
 No emojis. Both Paper Bag segments are real video (trailer finale footage).
+
+---
+
+## v4: `instant_regrets_short_v4.mp4` (no text, modern motion design)
+
+No captions, no FAIL! sign, no labels or emojis. Same 9.1s beat structure, with text-free effects:
+
+| Beat | Motion design |
+|---|---|
+| Hook (0–0.45s) | 2 anime-style **impact frames** (inverted / hard b&w), then **shockwave ripple** distortion, radial zoom blur, bloom |
+| Rewind | Frame-blended **motion trails**, desaturated, minimal **scrub bar** with glowing playhead sliding back |
+| Before (Paper Bag video) | **Whip-pan** in with motion blur, warm **light leak**, **viewfinder brackets** snap in, blinking REC dot, film grain |
+| Eye-hole dive | Zoom-through + **radial blur** into black |
+| The fail | Emerge from black, slow-mo adds sliding **cinematic bars** + cool desaturation, impact frames + shockwave + shake + bloom + RGB split, whip-out |
+| After (Paper Bag video) | Whip-in, red light leak, brackets, **glowing arc gauge** fills yellow → red (mirrors his frown) and pulses at max |
+| Loop | Radial-blur dive back into the splash peak (frame 1) |
