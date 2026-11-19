@@ -27,7 +27,7 @@ Deadpan narrator ("Desmond" preset voice, Seed Audio), silence-trimmed WAVs:
 | `vo_gravity_still_undefeated.wav` | "Gravity. Still undefeated." | **any fall** |
 | `vo_ten_out_of_ten_no_notes.wav` | "Ten out of ten. No notes." | **any fail** (pairs with the slow clap) |
 
-New lines cost about 0.3 credits each, so every Short can get a custom roast.
+New lines cost about 0.3 credits each, so every Short can get a custom roast. All files here are transcript-verified (no garbled preamble or repeated words).
 
 ## Ideas for the next batch
 Laughing (bag shaking), "wait for it" lean-in with popcorn, thumbs down, shrug, standing ovation.

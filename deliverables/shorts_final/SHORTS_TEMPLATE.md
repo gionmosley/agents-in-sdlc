@@ -41,7 +41,12 @@ Square / horizontal clips are shown in full over a blurred, zoomed copy of thems
 | File | Fail | Voiceover |
 |---|---|---|
 | `instant_regrets_short_banner.mp4` (16.4s) · **6/10 PAINFUL** | Kids' run-through banner pile-up | "Big game. Big entrance. What could go wrong?" / "Everything. Everything could go wrong." / "The banner went undefeated today." / "Honestly? Best play of the season." |
-| `instant_regrets_short_knicks.mp4` (15.8s) · **9/10 CATASTROPHIC** | Fan falls off the sign outside the arena | "This guy really loves his team." / "Commitment… is not grip strength." / "He said he'd fall for this team. Literally." / "Ten out of ten. No notes." |
+| `instant_regrets_short_knicks.mp4` (14.8s) · **9/10 CATASTROPHIC** | Fan falls off the sign outside the arena | "This guy really loves his team." / "Commitment is not grip strength." / "He said he'd fall for this team. Literally." / "Ten out of ten. No notes." |
 | `instant_regrets_short_skatepark.mp4` (17.4s) · **7/10 YIKES** | Skatepark wipeout · reactions: watch-this → **can't watch** | "Confidence: one hundred. Skill: still loading." / "And the board… has left the chat." / "Concrete. Undefeated since forever." / "Ten for the slide. Zero for the trick." |
-| `instant_regrets_short_seltzer.mp4` (15.3s) · **5/10 SOAKED** | Seltzer can sprays friend's face · reactions: **can't watch** → flinch | "She says she's done this a hundred times." / "Make that a hundred and one." / "Her friend did not sign up for a shower." / "Hydration level: maximum." |
+| `instant_regrets_short_seltzer.mp4` (14.5s) · **5/10 SOAKED** | Seltzer can sprays friend's face · reactions: **can't watch** → flinch | "She's done this a hundred times." / "Make that a hundred and one." / "Her friend did not sign up for a shower." / "Hydration level: maximum." |
 | `../shorts_v3/instant_regrets_short_v5.mp4` (14.4s) · **8/10 BRUTAL** | Creek jump (AI demo) | Kevin lines |
+
+## Voiceover QA (required)
+Seed Audio sometimes adds garbled words *before* the line or repeats a word. Every line is now transcribed
+(Whisper) after generation, cut to start at its first real word, and the final mix is transcribed again to
+confirm the narration reads exactly as written. Lines are never sped up.
