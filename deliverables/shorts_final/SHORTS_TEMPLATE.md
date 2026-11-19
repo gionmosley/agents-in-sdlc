@@ -1,13 +1,13 @@
 # Instant Regrets — Official Shorts Template (v5 layout)
 
 Every Short from now on uses this layout: full-screen 1080×1920, **no captions, no stickers, no REC/viewfinder
-graphics**, Paper Bag reaction clips before and after the fail, and a deadpan voiceover roast.
+graphics, no meter, no b&w flash at the start**, Paper Bag reaction clips before and after the fail, and a deadpan voiceover roast.
 
 ## Beat sheet
 
 | # | Beat | Length | Picture | Sound |
 |---|---|---|---|---|
-| 1 | **Hook** | 0.45s | Starts *on the impact*: 2 impact frames (inverted / hard b&w) → shockwave ripple, radial blur, bloom, shake | Impact audio + boom |
+| 1 | **Hook** | 0.45s | Starts *on the impact*: shockwave ripple, light radial blur, bloom, shake | Impact audio + boom |
 | 2 | **Rewind** | 0.4s | Reverse scrub with motion trails + thin glowing scrub bar | Tape-rewind |
 | 3 | **Before**: `react_01_watch_this` | ~2.4–3.7s | Whip-in, warm light leak → punch-zoom through into the fail | **VO 1** (setup) |
 | 4 | **The fail** | ~0.7s | Real-time run-up | Clip audio |
@@ -15,7 +15,7 @@ graphics**, Paper Bag reaction clips before and after the fail, and a deadpan vo
 | 6 | **Impact** | 0.6s | Impact frames + shockwave + shake + bloom + RGB split → whip-out | Clip audio + boom |
 | 7 | **Flinch**: `react_02_flinch` | 0.75s | Recoil shake on his flinch | Gasp/rustle |
 | 8 | **Facepalm**: `react_03_facepalm` | ~2–3s | Whip-in | **VO 3** (the roast) |
-| 9 | **Slow clap**: `react_04_slow_clap` | ~2.7s | Glow gauge steps up **one notch per clap**, red pulse at max | Claps + **VO 4** (the verdict) |
+| 9 | **Slow clap**: `react_04_slow_clap` | ~2.7s | Micro zoom-punch on each clap | Claps + **VO 4** (the verdict) |
 | 10 | **Loop** | 0.35s | Radial dive back into the impact frame = frame 1 | Glitch |
 
 Total ≈ 13.5–16s. Background audio auto-ducks under the voiceover.
