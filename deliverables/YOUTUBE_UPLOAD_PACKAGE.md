@@ -52,7 +52,7 @@ instant regrets, instant regret, fails, fail compilation, funny fails, epic fail
 
 ---
 
-## Thumbnails (`thumbnails/`, 1280×720 JPG, all under 2 MB)
+## Thumbnails (`thumbnails/`, 13 total, 1280×720 JPG, all under 2 MB)
 
 | File | Concept | Best paired with title |
 |---|---|---|
@@ -61,6 +61,23 @@ instant regrets, instant regret, fails, fail compilation, funny fails, epic fail
 | `thumb3_cake.jpg` | Cake catastrophe, red circle + arrow, "WHY?!" | #1 One Bad Decision… |
 | `thumb4_grid.jpg` | 4-fail grid with the bag in the middle, "subscribe or regret it" | #3 You'll Regret Not Subscribing |
 | `thumb5_cctv.jpg` | CCTV glass-door bonk, "door: 1 / him: 0" scoreboard | #5 Fails So Bad You'll Feel It |
+
+
+### Cinematic set (Higgsfield Nano Banana renders + brand overlays)
+
+| File | Concept | Hook |
+|---|---|---|
+| `thumb6_cinema.jpg` | Paper Bag guy alone in a dark cinema, projector beam, mud-splash fail on screen | "he's seen it all." |
+| `thumb7_control_room.jpg` | Bag guy facepalming in front of a wall of fail monitors | "we watched 1,000 fails." |
+| `thumb8_trampoline.jpg` | Golden-hour backflip off a trampoline toward a pool edge, frozen mid-air | "wait for it..." + arrow |
+| `thumb9_wedding_cake.jpg` | 5-tier wedding cake exploding mid-topple, horrified couple | "$10,000 cake. 0.5 seconds." |
+| `thumb10_christmas.jpg` | Santa-hat dad slipping off a ladder hanging lights, snowy blue hour | "so close." + red ring |
+| `thumb11_regret_room.jpg` | Bag guy in the white room with every fail frozen mid-air around him | "the regret room." |
+| `thumb12_shopping_cart.jpg` | Shopping cart losing a wheel downhill toward a fountain | "worst. idea. ever." |
+| `thumb13_glass_door.jpg` | Businessman face-first into a cracking glass door, coffee flying | "door: 1 / him: 0" |
+
+Strongest A/B trio for the trailer: **thumb11** (brand hero), **thumb6** (mascot + mystery), **thumb9** (pure spectacle).
+Every thumbnail carries the **instant regrets.** wordmark.
 
 **Tip:** upload 3 of them to YouTube's **Test & Compare** (thumbnail A/B test). Recommended trio: #3 (cake), #2 (seven regrets), #1 (the bag).
 
