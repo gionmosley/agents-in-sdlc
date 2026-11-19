@@ -1,5 +1,7 @@
 # Shorts covers v4: minimal / sleek / modern (1080×1920)
 
+> **Standard cover style for the Instant Regrets brand only.** Not a default for other channels or projects.
+
 Brand typography (lowercase Poppins like the logo), one accent colour per Short, lots of negative space,
 clean Paper Bag cutouts. 5 designs × 5 Shorts.
 
