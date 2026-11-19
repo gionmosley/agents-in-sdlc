@@ -1,7 +1,7 @@
 # Instant Regrets — Official Shorts Template (v5 layout)
 
 Every Short from now on uses this layout: full-screen 1080×1920, **no captions, no stickers, no REC/viewfinder
-graphics, no meter, no b&w flash at the start**, Paper Bag reaction clips before and after the fail, and a deadpan voiceover roast.
+graphics, no b&w flash at the start**, Paper Bag reaction clips before and after the fail, and a deadpan voiceover roast.
 
 ## Beat sheet
 
@@ -15,7 +15,7 @@ graphics, no meter, no b&w flash at the start**, Paper Bag reaction clips before
 | 6 | **Impact** | 0.6s | Impact frames + shockwave + shake + bloom + RGB split → whip-out | Clip audio + boom |
 | 7 | **Flinch**: `react_02_flinch` | 0.75s | Recoil shake on his flinch | Gasp/rustle |
 | 8 | **Facepalm**: `react_03_facepalm` | ~2–3s | Whip-in | **VO 3** (the roast) |
-| 9 | **Slow clap**: `react_04_slow_clap` | ~2.7s | Micro zoom-punch on each clap | Claps + **VO 4** (the verdict) |
+| 9 | **Slow clap + Regret Meter**: `react_04_slow_clap` | ~3.6s | Sleek HUD meter: big count-up score, ultra-thin green→red gradient track with glowing knob and tick dots; on the last clap the score turns the tier colour, a ring bursts from the knob and the **tier pill** pops in. Held 1s. | Claps + segment ticks + **VO 4** (the verdict) + braam on the slam |
 | 10 | **Loop** | 0.35s | Radial dive back into the impact frame = frame 1 | Glitch |
 
 Total ≈ 13.5–16s. Background audio auto-ducks under the voiceover.
@@ -24,10 +24,19 @@ Total ≈ 13.5–16s. Background audio auto-ducks under the voiceover.
 1. The fail clip (vertical or horizontal; auto-cropped to 9:16).
 2. Four timestamps: run-up start, slow-mo start, impact, hook frame. Plus the impact point on screen (for the shockwave).
 3. Four voiceover lines: setup / build-up (ends on impact) / roast / verdict.
+4. A **regret rating (1–10) and tier word** for how bad the fail was.
+
+### Rating scale
+| Score | Tier examples |
+|---|---|
+| 1–3 | MILD · OOPS |
+| 4–6 | PAINFUL · OUCH |
+| 7–8 | BRUTAL · YIKES |
+| 9–10 | CATASTROPHIC · LEGENDARY |
 
 ## Shorts made with it
 | File | Fail | Voiceover |
 |---|---|---|
-| `instant_regrets_short_banner.mp4` (15.6s) | Kids' run-through banner pile-up | "Big game. Big entrance. What could go wrong?" / "Everything. Everything could go wrong." / "The banner went undefeated today." / "Honestly? Best play of the season." |
-| `instant_regrets_short_knicks.mp4` (14.9s) | Fan falls off the sign outside the arena | "This guy really loves his team." / "Commitment… is not grip strength." / "He said he'd fall for this team. Literally." / "Ten out of ten. No notes." |
-| `../shorts_v3/instant_regrets_short_v5.mp4` (13.5s) | Creek jump (AI demo) | Kevin lines |
+| `instant_regrets_short_banner.mp4` (16.4s) · **6/10 PAINFUL** | Kids' run-through banner pile-up | "Big game. Big entrance. What could go wrong?" / "Everything. Everything could go wrong." / "The banner went undefeated today." / "Honestly? Best play of the season." |
+| `instant_regrets_short_knicks.mp4` (15.8s) · **9/10 CATASTROPHIC** | Fan falls off the sign outside the arena | "This guy really loves his team." / "Commitment… is not grip strength." / "He said he'd fall for this team. Literally." / "Ten out of ten. No notes." |
+| `../shorts_v3/instant_regrets_short_v5.mp4` (14.4s) · **8/10 BRUTAL** | Creek jump (AI demo) | Kevin lines |
