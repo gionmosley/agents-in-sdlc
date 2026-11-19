@@ -54,11 +54,11 @@ instant regrets, instant regret, fails, fail compilation, funny fails, epic fail
 
 ## Thumbnails (`thumbnails/`, 13 total, 1280×720 JPG, all under 2 MB)
 
-Clean image-only thumbnails: no captions or text overlays. Each carries only the **instant regrets.** logo.
+Clean image-only thumbnails: no captions, text overlays or logo.
 
 | File | Scene | Source |
 |---|---|---|
-| `thumb1_the_bag.jpg` | Paper Bag guy close-up, dark left side with large logo | trailer frame |
+| `thumb1_the_bag.jpg` | Paper Bag guy close-up, dark left side | trailer frame |
 | `thumb2_seven_regrets.jpg` | Mud-splash freeze with Paper Bag inset | trailer frames |
 | `thumb3_cake.jpg` | Kitchen cake catastrophe | trailer frame |
 | `thumb4_grid.jpg` | 4-fail grid with the Paper Bag in the center | trailer frames |
